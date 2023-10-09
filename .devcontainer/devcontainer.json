@@ -1,0 +1,46 @@
+{
+	"name": "inkywhat-dsp",
+	"initializeCommand": "make core-build",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "inkywhat-dsp-devcontainer",
+	"workspaceFolder": "/workspace",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"notebook.output.scrolling": true,
+				"python.analysis.extraPaths": [
+					"/workspace/src/inkywhat_dsp"
+				],
+				"editor.formatOnSave": true,
+				"files.trimFinalNewlines": true,
+				"files.trimTrailingWhitespace": true,
+				"files.watcherExclude": {
+					".git/**": true,
+					"./resources/**": true,
+					"./notebooks/**": true
+				},
+				"python.formatting.provider": "none",
+				"[python]": {
+					"editor.defaultFormatter": "ms-python.black-formatter"
+				},
+				"black-formatter.args": [
+					"--line-length",
+					"79"
+				],
+				"notebook.formatOnSave.enabled": true
+			},
+			"extensions": [
+				"ms-python.python",
+				"ms-python.black-formatter",
+				"ms-python.flake8",
+				"eamodio.gitlens",
+				"njpwerner.autodocstring",
+				"ms-azuretools.vscode-docker",
+				"ms-vscode.makefile-tools",
+				"ms-toolsai.jupyter",
+				"redhat.vscode-yaml"
+			]
+		}
+	},
+	"postCreateCommand": "bash .devcontainer/entrypoint.sh"
+}

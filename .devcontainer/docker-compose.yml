@@ -1,0 +1,19 @@
+services:
+    inkywhat-dsp-devcontainer:
+        network_mode: host
+        image: inkywhat-dsp-devcontainer
+        container_name: inkywhat-dsp-devcontainer
+        build:
+            context: ..
+            dockerfile: .devcontainer/Dockerfile
+        volumes:
+            - ..:/workspace:cached
+            - $PWD/src:/src
+            - $PWD/notebooks:/notebooks
+            - $PWD/resources:/resources
+        devices:
+            - "/dev/i2c-1:/dev/i2c-1"
+            - "/dev/spidev0.0:/dev/spidev0.0"
+        privileged: true
+        # Please do not comment or remove this line!
+        command: /bin/sh -c "while sleep 1000; do :; done"

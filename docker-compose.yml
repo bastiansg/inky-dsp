@@ -1,0 +1,44 @@
+services:
+    inkywhat-dsp-core:
+        image: ${CORE_IMAGE}
+        container_name: inkywhat-dsp-core
+        network_mode: host
+        build:
+            context: .
+            dockerfile: ./build/core/Dockerfile
+            args:
+                - PYTHON_VERSION=${PYTHON_VERSION}
+                - PIP_VERSION=${PIP_VERSION}
+        volumes:
+            - ..:/workspace:cached
+            - $PWD/src:/src
+            - $PWD/notebooks:/notebooks
+            - $PWD/resources:/resources
+        devices:
+            - "/dev/i2c-1:/dev/i2c-1"
+            - "/dev/spidev0.0:/dev/spidev0.0"
+        env_file:
+            - .env
+        privileged: true
+
+    inkywhat-dsp-api:
+        image: ${API_IMAGE}
+        container_name: inkywhat-dsp-api
+        network_mode: host
+        build:
+            context: .
+            dockerfile: ./build/api/Dockerfile
+            args:
+                - CORE_IMAGE=${CORE_IMAGE}
+        volumes:
+            - ..:/workspace:cached
+            - $PWD/src:/src
+            - $PWD/notebooks:/notebooks
+            - $PWD/resources:/resources
+        devices:
+            - "/dev/i2c-1:/dev/i2c-1"
+            - "/dev/spidev0.0:/dev/spidev0.0"
+        env_file:
+            - .env
+        privileged: true
+        restart: unless-stopped
