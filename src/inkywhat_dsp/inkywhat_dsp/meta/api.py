@@ -1,5 +1,9 @@
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictStr, StrictInt
 
 
-class EncodedImage(BaseModel):
-    encoded_image: StrictStr
+class SetImageInput(BaseModel):
+    image: StrictStr
+
+
+class SetImageOutput(BaseModel):
+    orientation: StrictInt

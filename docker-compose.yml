@@ -33,7 +33,6 @@ services:
         volumes:
             - ..:/workspace:cached
             - $PWD/src:/src
-            - $PWD/notebooks:/notebooks
             - $PWD/resources:/resources
         devices:
             - "/dev/i2c-1:/dev/i2c-1"

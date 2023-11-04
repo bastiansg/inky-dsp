@@ -1,5 +1,5 @@
 ARG CORE_IMAGE
 FROM ${CORE_IMAGE}
 
-COPY ./build/api/entrypoint.sh /usr/bin/entrypoint.sh
-ENTRYPOINT sh /usr/bin/entrypoint.sh
+WORKDIR /src/inkywhat_dsp/inkywhat_dsp/api
+CMD uvicorn app:app --host 0.0.0.0

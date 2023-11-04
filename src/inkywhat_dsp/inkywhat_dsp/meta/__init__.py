@@ -1,1 +1,1 @@
-from .api import EncodedImage  # noqa
+from .api import SetImageInput, SetImageOutput  # noqa

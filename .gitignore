@@ -2,5 +2,7 @@
 **/*.ipynb_checkpoints
 **/*.egg-info
 
+resources
 
-/resources
+.vscode/*
+!.vscode/launch.json
