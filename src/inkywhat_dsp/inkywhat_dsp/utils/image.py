@@ -1,7 +1,15 @@
+import numpy as np
+
 from PIL import Image
 from io import BytesIO
 from base64 import b64encode, b64decode
-from torchvision.transforms.functional import resize, pad, rotate
+
+from torchvision.transforms.functional import (
+    resize,
+    pad,
+    rotate,
+    # InterpolationMode,
+)
 
 
 def encode_image(image: Image) -> str:
@@ -37,6 +45,7 @@ def resize_image(
     image: Image.Image,
     size: int,
     max_size: int,
+    pad_fill: int = 0,
 ) -> tuple[int, Image.Image]:
     w, h = image.size
     orientation = 0
@@ -47,6 +56,9 @@ def resize_image(
     resized_image = resize(
         img=image,
         size=size,
+        # interpolation=InterpolationMode.NEAREST,
+        # interpolation=InterpolationMode.BILINEAR,
+        # interpolation=InterpolationMode.NEAREST_EXACT,
         max_size=max_size,
     )
 
@@ -60,6 +72,7 @@ def resize_image(
         resized_image = pad(
             img=resized_image,
             padding=[l_pad, 0, r_pad, 0],
+            fill=pad_fill,
         )
 
         return resized_image
@@ -70,6 +83,7 @@ def resize_image(
         resized_image = pad(
             img=resized_image,
             padding=[0, t_pad, 0, b_pad],
+            fill=pad_fill,
         )
 
     return orientation, resized_image
@@ -81,3 +95,32 @@ def get_inky_image(input_image: Image.Image) -> Image.Image:
 
     inky_image = input_image.convert("RGB").quantize(palette=pal_img)
     return inky_image
+
+
+def get_rbw_image(
+    image: Image.Image,
+    r_thresh: int = 100,
+    b_thresh: int = 100,
+) -> Image.Image:
+    image = image.convert("RGB")
+    image_data = np.array(image)
+
+    red, green, blue = (
+        image_data[:, :, 0],
+        image_data[:, :, 1],
+        image_data[:, :, 2],
+    )
+
+    mask_r = (red >= r_thresh) & (green < r_thresh) & (blue < r_thresh)
+    mask_g = (red < r_thresh) & (green >= r_thresh) & (blue < r_thresh)
+    mask_b = (red < r_thresh) & (green < r_thresh) & (blue >= r_thresh)
+
+    mask_black = (red < b_thresh) & (green < b_thresh) & (blue < b_thresh)
+    mask_red = (mask_r | mask_g | mask_b) & (~mask_black)
+
+    rbw_image_data = np.full(image_data.shape, [255, 255, 255], dtype=np.uint8)
+    rbw_image_data[mask_red] = [255, 0, 0]
+    rbw_image_data[mask_black] = [0, 0, 0]
+
+    rbw_image = Image.fromarray(rbw_image_data)
+    return rbw_image

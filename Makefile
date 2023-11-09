@@ -1,4 +1,5 @@
 core-build:
+	[ -e .secrets/.env ] || touch .secrets/.env
 	docker compose build inkywhat-dsp-core
 
 core-run:

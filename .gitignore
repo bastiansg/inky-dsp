@@ -6,3 +6,6 @@ resources
 
 .vscode/*
 !.vscode/launch.json
+
+.secrets/*
+!.secrets/.gitkeep
