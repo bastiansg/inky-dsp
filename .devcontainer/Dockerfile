@@ -1,4 +1,4 @@
-FROM inkywhat-dsp/core:latest
+FROM inkywhat-dsp/core
 
 RUN --mount=type=cache,target=/var/cache/apt \
     --mount=target=/var/cache/apt,type=cache,sharing=locked \
