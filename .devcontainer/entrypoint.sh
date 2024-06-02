@@ -1,3 +1,3 @@
 #!/bin/env sh
 
-pip install -e /workspace/src/inkywhat_dsp --break-system-packages
+pip install -e . --no-deps

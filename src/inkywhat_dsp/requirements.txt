@@ -1,9 +1,0 @@
-rich==13.6.0
-more-itertools==10.1.0
-Pillow==10.1.0
-fastapi==0.104.1
-uvicorn==0.24.0
-pydantic==2.4.2
-inky[rpi]==1.5.0
-torchvision==0.16.0
-openai==1.1.2

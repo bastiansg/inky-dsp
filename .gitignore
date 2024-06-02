@@ -1,8 +1,10 @@
 **/__pycache__
 **/*.ipynb_checkpoints
 **/*.egg-info
+**/.cache
 
-resources
+build/
+resources/
 
 .vscode/*
 !.vscode/launch.json

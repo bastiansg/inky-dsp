@@ -13,14 +13,11 @@ RUN --mount=type=cache,target=/var/cache/apt \
 
 WORKDIR /tmp
 
-# Install dev packages
 COPY .devcontainer/requirements.txt .
 RUN --mount=type=cache,target=/root/.cache \
-    pip install -r requirements.txt --break-system-packages
+    pip install -r requirements.txt
 
-# Clean
 RUN rm -rf /tmp/*
 
-# Terminal with zsh
-RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ENV SHELL=/usr/bin/zsh
+RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
