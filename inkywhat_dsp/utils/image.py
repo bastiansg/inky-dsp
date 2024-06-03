@@ -46,11 +46,11 @@ def resize_image(
     size: int,
     max_size: int,
     pad_fill: int = 0,
-) -> tuple[int, Image.Image]:
+) -> tuple[bool, Image.Image]:
     w, h = image.size
-    orientation = 0
+    orientation = False
     if w < h:
-        orientation = 1
+        orientation = True
         image = rotate(img=image, angle=90, expand=True)
 
     resized_image = resize(
@@ -75,7 +75,7 @@ def resize_image(
             fill=pad_fill,
         )
 
-        return resized_image
+        return orientation, resized_image
 
     # NOTE in case of vertical padding
     if h_pad_size:
@@ -99,8 +99,8 @@ def get_inky_image(input_image: Image.Image) -> Image.Image:
 
 def get_rbw_image(
     image: Image.Image,
-    r_thresh: int = 100,
-    b_thresh: int = 100,
+    r_thresh: int = 120,
+    b_thresh: int = 120,
 ) -> Image.Image:
     image = image.convert("RGB")
     image_data = np.array(image)

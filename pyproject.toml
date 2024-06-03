@@ -23,3 +23,6 @@ include = ["inkywhat_dsp"]
 dependencies = { file = ["requirements.txt"] }
 
 [tool.setuptools_scm]
+
+[tool.setuptools.package-data]
+"inkywhat_dsp" = ["data/*"]

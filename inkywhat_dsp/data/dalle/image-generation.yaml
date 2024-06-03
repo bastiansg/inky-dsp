@@ -1,0 +1,3 @@
+base-prompt: >-
+    Create a detailed sketch-style illustration using only black, white, and red colors of {image_description}.
+    Ensure the sketch has a lively, vibrant feel, with strong contrasts and bold lines.

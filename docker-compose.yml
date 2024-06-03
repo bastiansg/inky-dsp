@@ -17,7 +17,6 @@ services:
             context: .
             dockerfile: ./dockerbuild/api/Dockerfile
         volumes:
-            - $PWD/src:/src
             - $PWD/resources:/resources
         devices:
             - "/dev/i2c-1:/dev/i2c-1"
