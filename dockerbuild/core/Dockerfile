@@ -10,6 +10,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     ca-certificates \
     gcc \
     git-core \
+    libsndfile1 \
     python${PYTHON_VERSION} \
     python${PYTHON_VERSION}-dev \
     python3-setuptools \
