@@ -91,10 +91,9 @@ def resize_image(
 
 def get_inky_image(input_image: Image.Image) -> Image.Image:
     pal_img = Image.new("P", (1, 1))
-    pal_img.putpalette((255, 255, 255, 0, 0, 0, 255, 0, 0) + (0, 0, 0) * 252)
+    # pal_img.putpalette((255, 255, 255, 0, 0, 0, 255, 0, 0) + (0, 0, 0) * 252)
 
-    inky_image = input_image.convert("RGB").quantize(palette=pal_img)
-    return inky_image
+    return input_image.convert("RGB").quantize(palette=pal_img)
 
 
 def get_rbw_image(

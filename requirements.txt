@@ -1,13 +1,12 @@
-rich==13.7.1
-more-itertools==10.2.0
-Pillow==10.3.0
-fastapi==0.111.0
-uvicorn==0.30.1
-pydantic==2.7.2
-inky[rpi]==1.5.0
-torchaudio==2.3.0
-torchvision==0.18.0
-openai==1.30.5
-soundfile==0.12.1
+fastapi==0.115.8
+uvicorn==0.34.0
+pydantic==2.10.6
 
-common @ git+ssh://git@github.com/collectiveai-team/common.git@v1.0.3
+Pillow==11.1.0
+inky[rpi]==2.0.0
+torchaudio==2.6.0
+torchvision==0.21.0
+openai==1.62.0
+soundfile==0.13.1
+
+common @ git+https://git@github.com/aureka-team/common.git@v1.1.2

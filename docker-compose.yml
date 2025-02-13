@@ -4,10 +4,11 @@ services:
         container_name: inkywhat-dsp-core
         build:
             context: .
-            dockerfile: ./dockerbuild/core/Dockerfile
+            dockerfile: ./docker/core/Dockerfile
             args:
-                - PYTHON_VERSION=${PYTHON_VERSION}
-                - PIP_VERSION=${PIP_VERSION}
+                - PYTHON_VERSION
+                - UV_VERSION
+                - UV_SYSTEM_PYTHON
 
     inkywhat-dsp-api:
         image: inkywhat-dsp/api
@@ -15,7 +16,7 @@ services:
         network_mode: host
         build:
             context: .
-            dockerfile: ./dockerbuild/api/Dockerfile
+            dockerfile: ./docker/api/Dockerfile
         volumes:
             - $PWD/resources:/resources
         devices:

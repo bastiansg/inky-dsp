@@ -1,3 +1,6 @@
+ARG UV_VERSION
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv_source
+
 FROM ubuntu:noble
 
 ARG PYTHON_VERSION
@@ -22,18 +25,13 @@ RUN rm /usr/lib/python${PYTHON_VERSION}/EXTERNALLY-MANAGED
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1 \
     && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTHON_VERSION} 1
 
-WORKDIR /tmp
+COPY --from=uv_source /uv /uvx /bin/
 
-ARG PIP_VERSION
-RUN wget --no-check-certificate \
-    https://github.com/pypa/pip/archive/refs/tags/${PIP_VERSION}.zip \
-    && unzip ${PIP_VERSION}.zip \
-    && cd pip-${PIP_VERSION} \
-    && python setup.py install
+WORKDIR /tmp
 
 COPY ./requirements.txt requirements.txt
 RUN --mount=type=cache,target=/root/.cache \
-    pip install -r requirements.txt
+    uv pip install -r requirements.txt --system
 
 RUN rm -rf /tmp/*
 

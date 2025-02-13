@@ -14,9 +14,6 @@ core-run:
 devcontainer-build: core-build
 	docker compose -f .devcontainer/docker-compose.yml build inkywhat-dsp-devcontainer
 
-devcontainer-run: devcontainer-build
-	docker compose -f .devcontainer/docker-compose.yml run inkywhat-dsp-devcontainer
-
 
 api-build: core-build
 	docker compose build inkywhat-dsp-api

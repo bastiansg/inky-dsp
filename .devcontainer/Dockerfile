@@ -6,6 +6,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     vim \
     htop \
     zsh \
+    sudo \
     openssh-client \
     && apt-get autoremove -y \
     && apt-get clean \
@@ -15,7 +16,7 @@ WORKDIR /tmp
 
 COPY .devcontainer/requirements.txt .
 RUN --mount=type=cache,target=/root/.cache \
-    pip install -r requirements.txt
+    uv pip install -r requirements.txt --system
 
 RUN rm -rf /tmp/*
 
