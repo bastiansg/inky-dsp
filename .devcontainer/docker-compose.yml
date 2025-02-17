@@ -1,8 +1,8 @@
 services:
-    inkywhat-dsp-devcontainer:
+    inky-dsp-devcontainer:
         network_mode: host
-        image: inkywhat-dsp-devcontainer
-        container_name: inkywhat-dsp-devcontainer
+        image: inky-dsp-devcontainer
+        container_name: inky-dsp-devcontainer
         build:
             context: ..
             dockerfile: .devcontainer/Dockerfile
@@ -17,4 +17,4 @@ services:
             - ../.env
             - ../.secrets/.env
         # This keeps the devcontainer running.
-        entrypoint: [ "tail", "-f", "/dev/null" ]
+        entrypoint: ["tail", "-f", "/dev/null"]

@@ -5,21 +5,21 @@ include .env
 
 core-build:
 	[ -e .secrets/.env ] || touch .secrets/.env
-	docker compose build inkywhat-dsp-core
+	docker compose build inky-dsp-core
 
 core-run:
-	docker compose run inkywhat-dsp-core
+	docker compose run inky-dsp-core
 
 
 devcontainer-build: core-build
-	docker compose -f .devcontainer/docker-compose.yml build inkywhat-dsp-devcontainer
+	docker compose -f .devcontainer/docker-compose.yml build inky-dsp-devcontainer
 
 
 api-build: core-build
-	docker compose build inkywhat-dsp-api
+	docker compose build inky-dsp-api
 
 api-run: api-build
-	docker compose run inkywhat-dsp-api
+	docker compose run inky-dsp-api
 
 api-up: api-build
-	docker compose up inkywhat-dsp-api -d
+	docker compose up inky-dsp-api -d

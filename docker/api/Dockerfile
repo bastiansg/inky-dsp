@@ -1,10 +1,10 @@
-FROM inkywhat-dsp/core
+FROM inky-dsp/core
 
-COPY inkywhat_dsp /src/inkywhat_dsp
+COPY inky_dsp /src/inky_dsp
 COPY requirements.txt pyproject.toml  /src/
 RUN --mount=type=cache,target=/root/.cache \
     --mount=type=bind,source=.git,target=/src/.git \
     pip install /src --no-deps
 
-WORKDIR /src/inkywhat_dsp/api
+WORKDIR /src/inky_dsp/api
 CMD fastapi run app.py

@@ -1,1 +1,1 @@
-# inkywhat-dsp
+# inky-dsp

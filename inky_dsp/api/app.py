@@ -4,8 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from .image.set_image import set_image_router
-from .image.gnerate_image import generate_image_router
+from .routers.display_image import display_image_router
 
 
 app = FastAPI()
@@ -24,5 +23,4 @@ async def add_process_time_header(request: Request, call_next):
     return response
 
 
-app.include_router(set_image_router)
-app.include_router(generate_image_router)
+app.include_router(display_image_router)

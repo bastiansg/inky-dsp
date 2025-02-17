@@ -8,11 +8,7 @@
             "request": "launch",
             "module": "uvicorn",
             "jinja": true,
-            "args": [
-                "inkywhat_dsp.api.app:app",
-                "--port",
-                "8000",
-            ],
+            "args": ["inky_dsp.api.app:app", "--port", "8000"]
         }
     ]
 }

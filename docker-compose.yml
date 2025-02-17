@@ -1,7 +1,7 @@
 services:
-    inkywhat-dsp-core:
-        image: inkywhat-dsp/core
-        container_name: inkywhat-dsp-core
+    inky-dsp-core:
+        image: inky-dsp/core
+        container_name: inky-dsp-core
         build:
             context: .
             dockerfile: ./docker/core/Dockerfile
@@ -10,9 +10,9 @@ services:
                 - UV_VERSION
                 - UV_SYSTEM_PYTHON
 
-    inkywhat-dsp-api:
-        image: inkywhat-dsp/api
-        container_name: inkywhat-dsp-api
+    inky-dsp-api:
+        image: inky-dsp/api
+        container_name: inky-dsp-api
         network_mode: host
         build:
             context: .

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 requires-python = ">=3.12"
-name = "inkywhat_dsp"
+name = "inky_dsp"
 dynamic = ["version", "dependencies"]
 description = ""
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["inkywhat_dsp"]
+include = ["inky_dsp"]
 
 [tool.setuptools.dynamic]
 dependencies = { file = ["requirements.txt"] }
@@ -25,4 +25,4 @@ dependencies = { file = ["requirements.txt"] }
 [tool.setuptools_scm]
 
 [tool.setuptools.package-data]
-"inkywhat_dsp" = ["data/*"]
+"inky_dsp" = ["conf/*"]
