@@ -23,4 +23,3 @@ networks:
     inky-dsp:
         name: inky-dsp
         driver: bridge
-
