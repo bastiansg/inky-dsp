@@ -1,10 +1,7 @@
-include .env
-
 .PHONY: core-build api-build devcontainer-build
 
 
 core-build:
-	[ -e .secrets/.env ] || touch .secrets/.env
 	docker compose build inky-dsp-core
 
 core-run:
@@ -19,7 +16,10 @@ api-build: core-build
 	docker compose build inky-dsp-api
 
 api-run: api-build
-	docker compose run inky-dsp-api
+	docker compose run --rm inky-dsp-api
 
 api-up: api-build
 	docker compose up inky-dsp-api -d
+
+api-stop:
+	docker compose stop inky-dsp-api

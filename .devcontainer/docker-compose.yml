@@ -1,6 +1,5 @@
 services:
     inky-dsp-devcontainer:
-        network_mode: host
         image: inky-dsp-devcontainer
         container_name: inky-dsp-devcontainer
         build:
@@ -15,6 +14,13 @@ services:
         privileged: true
         env_file:
             - ../.env
-            - ../.secrets/.env
         # This keeps the devcontainer running.
         entrypoint: ["tail", "-f", "/dev/null"]
+        networks:
+            - inky-dsp
+
+networks:
+    inky-dsp:
+        name: inky-dsp
+        driver: bridge
+
