@@ -1,9 +1,9 @@
 fastapi[standard]==0.115.12
-uvicorn==0.34.2
-pydantic==2.11.4
+uvicorn==0.34.3
+pydantic==2.11.6
 
 Pillow==11.2.1
 inky[rpi]==2.1.0
-torchvision==0.22.0
+torchvision==0.22.1
 
-common @ git+https://git@github.com/aureka-team/common.git@v1.1.6
+common @ git+https://git@github.com/aureka-team/common.git@v1.1.8
