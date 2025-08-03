@@ -23,3 +23,5 @@ api-up: api-build
 
 api-stop:
 	docker compose stop inky-dsp-api
+
+api-restart: api-build api-stop api-up

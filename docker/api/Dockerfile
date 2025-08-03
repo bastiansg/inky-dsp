@@ -1,7 +1,7 @@
 FROM inky-dsp/core
 
 COPY inky_dsp /src/inky_dsp
-COPY requirements.txt pyproject.toml  /src/
+COPY requirements.txt pyproject.toml /src/
 RUN --mount=type=cache,target=/root/.cache \
     --mount=type=bind,source=.git,target=/src/.git \
     uv pip install /src --no-deps

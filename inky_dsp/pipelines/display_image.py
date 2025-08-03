@@ -13,7 +13,7 @@ logger = get_logger(__name__)
 
 
 display = auto()
-width, height = display.resolution
+width, height = display.resolution  # type: ignore
 
 
 def display_image(file_item: dict) -> None:
