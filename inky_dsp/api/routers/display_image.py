@@ -2,7 +2,7 @@ from pydantic import BaseModel, StrictStr
 from fastapi import APIRouter, UploadFile, HTTPException
 
 from common.logger import get_logger
-from inky_dsp.pipelines import display_image
+from inky_dsp.pipelines import display_image_from_file, FileItem
 
 
 logger = get_logger(__name__)
@@ -33,12 +33,15 @@ async def diplay_image(file: UploadFile) -> DisplayImageOutput:
             ),
         )
 
-    display_image(
-        {
-            "content": file.file.read(),
-            "file_name": file.filename,
-            "content_type": content_type,
-        }
+    file_name = file.filename
+    assert file_name is not None
+
+    display_image_from_file(
+        file_item=FileItem(
+            file_name=file_name,
+            content_type=content_type,
+            content=file.file.read(),
+        )
     )
 
     return DisplayImageOutput(status="ok")

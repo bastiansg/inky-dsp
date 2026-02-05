@@ -1,6 +1,7 @@
 import inky
 
 from inky.auto import auto
+from pydantic import BaseModel, StrictStr, StrictBytes
 
 from PIL import Image
 from common.logger import get_logger
@@ -13,26 +14,36 @@ logger = get_logger(__name__)
 
 
 display = auto()
-width, height = display.resolution  # type: ignore
+width, height = display.resolution
 
 
-def display_image(file_item: dict) -> None:
+class FileItem(BaseModel):
+    file_name: StrictStr
+    content_type: StrictStr
+    content: StrictBytes
+
+
+def display_image(file_path: str) -> None:
+    image = Image.open(file_path)
+    is_portrait, resized_image = resize_image(
+        image=image,
+        size=height,
+        max_size=width,
+    )
+
+    logger.info(f"is_portrait => {is_portrait}")
+
+    display.set_image(resized_image)
+    display.set_border(inky.BLACK)
+    display.show()
+
+
+def display_image_from_file(file_item: FileItem) -> None:
     with NamedTemporaryFile(
-        prefix=file_item["file_name"],
-        suffix=file_item["content_type"].split("/")[-1],
+        prefix=file_item.file_name,
+        suffix=file_item.content_type.split("/")[-1],
     ) as tmp_file:
-        tmp_file.write(file_item["content"])
+        tmp_file.write(file_item.content)
         tmp_file.seek(0)
 
-        image = Image.open(tmp_file.name)
-        is_portrait, resized_image = resize_image(
-            image=image,
-            size=height,
-            max_size=width,
-        )
-
-        logger.info(f"is_portrait => {is_portrait}")
-
-        display.set_image(resized_image)
-        display.set_border(inky.BLACK)
-        display.show()
+        display_image(file_path=tmp_file.name)
