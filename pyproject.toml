@@ -3,7 +3,7 @@ requires = ["setuptools>=64", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 name = "inky_dsp"
 dynamic = ["version", "dependencies"]
 description = ""
@@ -23,6 +23,3 @@ include = ["inky_dsp"]
 dependencies = { file = ["requirements.txt"] }
 
 [tool.setuptools_scm]
-
-[tool.setuptools.package-data]
-"inky_dsp" = ["conf/*"]

@@ -1,6 +1,5 @@
 {
     "name": "inky-dsp",
-    "initializeCommand": "make core-build",
     "dockerComposeFile": "docker-compose.yml",
     "service": "inky-dsp-devcontainer",
     "workspaceFolder": "/workspace",
