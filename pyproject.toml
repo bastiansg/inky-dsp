@@ -16,8 +16,12 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 
+[tool.setuptools]
+package-dir = { "" = "src" }
+
 [tool.setuptools.packages.find]
-include = ["inky_dsp"]
+where = ["src"]
+include = ["inky_dsp*"]
 
 [tool.setuptools.dynamic]
 dependencies = { file = ["requirements.txt"] }
