@@ -4,22 +4,14 @@
 
 ### Enable I2C and SPI
 
-Edit the Raspberry Pi boot configuration on the host:
-
 ```bash
-$ sudo vi /boot/firmware/config.txt
+$ sudo raspi-config nonint do_i2c 0
+$ sudo raspi-config nonint do_spi 0
 ```
 
-Enable `I2C`:
+Add this to `/boot/firmware/config.txt`:
 
 ```
-dtparam=i2c_arm=on
-```
-
-Ensure `SPI` is enabled without hardware CS:
-
-```
-dtparam=spi=on
 dtoverlay=spi0-0cs
 ```
 

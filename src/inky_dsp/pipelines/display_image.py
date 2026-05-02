@@ -1,16 +1,16 @@
 import inky
 
 from inky.auto import auto
+from rich.console import Console
 from pydantic import BaseModel, StrictStr, StrictBytes
 
 from PIL import Image
-from common.logger import get_logger
 from tempfile import NamedTemporaryFile
 
 from inky_dsp.utils.image import resize_image
 
 
-logger = get_logger(__name__)
+console = Console()
 
 
 display = auto()
@@ -31,8 +31,7 @@ def display_image(file_path: str) -> None:
         max_size=width,
     )
 
-    logger.info(f"is_portrait => {is_portrait}")
-
+    console.log(f"is_portrait => {is_portrait}")
     display.set_image(resized_image)
     display.set_border(inky.BLACK)
     display.show()

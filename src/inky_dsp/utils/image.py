@@ -3,7 +3,6 @@ from torchvision.transforms.functional import (
     resize,
     pad,
     rotate,
-    # InterpolationMode,
 )
 
 
@@ -36,9 +35,6 @@ def resize_image(
     resized_image = resize(
         img=image,
         size=size,
-        # interpolation=InterpolationMode.NEAREST,
-        # interpolation=InterpolationMode.BILINEAR,
-        # interpolation=InterpolationMode.NEAREST_EXACT,
         max_size=max_size,
     )
 

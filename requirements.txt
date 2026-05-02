@@ -1,5 +1,6 @@
-pydantic>=2.13.3
+rich>=15.0.0
 Pillow>=12.2.0
+pydantic>=2.13.3
 torchvision>=0.26.0
 
 inky==2.4.0
