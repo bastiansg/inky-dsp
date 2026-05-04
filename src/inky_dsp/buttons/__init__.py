@@ -1,1 +1,1 @@
-from .buttons import InkyButtons, ButtonMap  # noqa
+from .buttons import InkyButtons, ButtonMap, ButtonEvent  # noqa

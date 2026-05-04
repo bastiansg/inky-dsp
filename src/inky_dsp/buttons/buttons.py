@@ -2,18 +2,13 @@ import gpiod
 import gpiodevice
 
 from datetime import timedelta
-from rich.console import Console
-
 from threading import Semaphore
-from typing import Self
+from typing import Callable, Self
 
 from pydantic import BaseModel, StrictInt, StrictStr, model_validator
 from gpiod.line import Bias, Direction, Edge
 
 from .utils import threaded
-
-
-console = Console()
 
 
 class ButtonMap(BaseModel):
@@ -28,13 +23,21 @@ class ButtonMap(BaseModel):
         return self
 
 
+class ButtonEvent(BaseModel):
+    label: StrictStr
+    gpio: StrictInt
+    index: StrictInt
+
+
 class InkyButtons:
     def __init__(
         self,
         button_map: ButtonMap,
+        callback: Callable[[ButtonEvent], None],
         debounce_period_ms: int = 100,
     ):
         self.button_map = button_map
+        self.callback = callback
         self.debounce_period_ms = debounce_period_ms
 
         self.semaphore = Semaphore(value=1)
@@ -68,9 +71,13 @@ class InkyButtons:
                         break
 
                     index = offsets.index(event.line_offset)
-                    button = self.button_map.labels[index]
-                    gpio = self.button_map.buttons[index]
-                    console.log(f"button {button} pressed on GPIO {gpio}")
+                    self.callback(
+                        ButtonEvent(
+                            label=self.button_map.labels[index],
+                            gpio=self.button_map.buttons[index],
+                            index=index,
+                        )
+                    )
         finally:
             self.semaphore.release()
 
