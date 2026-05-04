@@ -7,7 +7,7 @@ from pydantic import BaseModel, StrictStr, StrictBytes
 from PIL import Image
 from tempfile import NamedTemporaryFile
 
-from inky_dsp.utils.image import resize_image
+from .utils import resize_image
 
 
 console = Console()
