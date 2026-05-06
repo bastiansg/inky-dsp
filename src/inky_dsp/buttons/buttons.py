@@ -2,13 +2,17 @@ import gpiod
 import gpiodevice
 
 from datetime import timedelta
-from threading import Semaphore
+from threading import Lock
+from rich.console import Console
 from typing import Callable, Self
 
 from pydantic import BaseModel, StrictInt, StrictStr, model_validator
 from gpiod.line import Bias, Direction, Edge
 
 from .utils import threaded
+
+
+console = Console()
 
 
 class ButtonMap(BaseModel):
@@ -40,12 +44,15 @@ class InkyButtons:
         self.callback = callback
         self.debounce_period_ms = debounce_period_ms
 
-        self.semaphore = Semaphore(value=1)
+        self.start_lock = Lock()
         self.is_running: bool = False
 
     @threaded
     def start(self) -> None:
-        self.semaphore.acquire()
+        if not self.start_lock.acquire(blocking=False):
+            return
+
+        console.log("InkyButtons started.")
         try:
             _input = gpiod.LineSettings(
                 direction=Direction.INPUT,
@@ -78,8 +85,12 @@ class InkyButtons:
                             index=index,
                         )
                     )
+
+                    while request.wait_edge_events(timeout=timedelta()):
+                        request.read_edge_events()
+
         finally:
-            self.semaphore.release()
+            self.start_lock.release()
 
     def stop(self) -> None:
         self.is_running = False
