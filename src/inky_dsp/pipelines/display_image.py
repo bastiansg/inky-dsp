@@ -23,8 +23,7 @@ class FileItem(BaseModel):
     content: StrictBytes
 
 
-def display_image(file_path: str) -> None:
-    image = Image.open(file_path)
+def display_image(image: Image.Image) -> None:
     is_portrait, resized_image = resize_image(
         image=image,
         size=height,
